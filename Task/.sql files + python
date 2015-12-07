@@ -1,0 +1,30 @@
+online:
+
+http://stackoverflow.com/questions/4408714/execute-sql-file-with-python-mysqldb
+https://www.youtube.com/watch?v=xgyVilYfJEo
+https://www.youtube.com/watch?v=2pAL1LoMjzM
+http://www.w3schools.com/sql/sql_foreignkey.asp
+
+----------------------------------------------------------------------------------------
+
+offline:
+
+How can execute sql script stored in *.sql file using MySQLdb python driver. I was trying
+
+
+cursor.execute(file(PATH_TO_FILE).read())
+
+but this doesn't work because cursor.execute can run only one sql command at once.
+My sql script contains several sql statements instead. Also I was trying
+
+
+cursor.execute('source %s'%PATH_TO_FILE)
+but also with no success.
+
+---answer---
+
+for line in open(PATH_TO_FILE):
+    cursor.execute(line)
+
+This assumes you have one SQL statement per line in your file.
+Otherwise you'll need to write some rules to join lines together.
